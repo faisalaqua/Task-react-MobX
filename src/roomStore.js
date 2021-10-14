@@ -33,6 +33,31 @@ class RoomStore {
       console.log(error);
     }
   };
+
+  deleteRoom = async (id) => {
+    try {
+      const response = await axios.delete(
+        `https://coded-task-axios-be.herokuapp.com/rooms/${id}`
+      );
+      let tempRooms = this.rooms.filter((room) => room.id !== id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  updateRoom = async (updatedRoom) => {
+    try {
+      const response = await axios.put(
+        `https://coded-task-axios-be.herokuapp.com/rooms/${updatedRoom.id}`,
+        updatedRoom
+      );
+      let tempRooms = this.rooms.map((room) =>
+        room.id === updatedRoom.id ? response.data : room
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 const roomStore = new RoomStore();
 export default roomStore;

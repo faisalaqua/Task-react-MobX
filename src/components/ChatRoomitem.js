@@ -2,6 +2,8 @@ import { Button } from "react-bootstrap";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import UpdateRoomModal from "./UpdateRoomModal";
+import roomStore from "../roomStore";
+import { observer } from "mobx-react";
 
 export default function ChatRoomitem(props) {
   const room = props.room;
@@ -12,7 +14,7 @@ export default function ChatRoomitem(props) {
   const openModal = () => setIsOpen(true);
 
   const handleDelete = () => {
-    props.deleteRoom(room.id);
+    roomStore.deleteRoom(room.id);
   };
   return (
     <div className="group">
@@ -36,12 +38,7 @@ export default function ChatRoomitem(props) {
       <Button className="delete" onClick={openModal}>
         Update
       </Button>
-      <UpdateRoomModal
-        isOpen={isOpen}
-        closeModal={closeModal}
-        room={room}
-        updateRoom={props.updateRoom}
-      />
+      <UpdateRoomModal isOpen={isOpen} closeModal={closeModal} room={room} />
     </div>
   );
 }

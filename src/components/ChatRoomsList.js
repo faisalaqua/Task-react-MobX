@@ -12,14 +12,7 @@ function ChatRoomsList(props) {
   const openModal = () => setIsOpen(true);
 
   const roomsList = roomStore.rooms.map((room) => {
-    return (
-      <ChatRoomitem
-        room={room}
-        key={room.id}
-        deleteRoom={props.deleteRoom}
-        updateRoom={props.updateRoom}
-      />
-    );
+    return <ChatRoomitem room={room} key={room.id} />;
   });
   return (
     <div className="main__chatlist">
